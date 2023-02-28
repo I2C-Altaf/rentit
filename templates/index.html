@@ -1,0 +1,921 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from jthemes.net/themes/html/rentit/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Jan 2023 05:13:34 GMT -->
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Rent It</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/static/ico/favicon.ico">
+
+    <!-- CSS Global -->
+    <link href="/static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/static/plugins/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/plugins/prettyphoto/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/plugins/owl-carousel2/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/static/plugins/owl-carousel2/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/static/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/plugins/swiper/css/swiper.min.css" rel="stylesheet">
+    <link href="/static/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="/static/css/theme.css" rel="stylesheet">
+    <link href="/static/css/theme-red-1.css" rel="stylesheet" id="theme-config-link">
+
+    <!-- Head Libs -->
+    <script src="/static/plugins/modernizr.custom.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="/static/plugins/iesupport/html5shiv.js"></script>
+    <script src="/static/plugins/iesupport/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=places"></script> -->
+    <script type="text/javascript">
+    var placeSearch,autocomplete, autocomplete2, autocomplete3, autocomplete4;
+    function initialize() {
+    autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), { types: [ 'geocode' ] });
+    autocomplete2 = new google.maps.places.Autocomplete(document.getElementById('autocomplete2'), { types: [ 'geocode' ] });
+    autocomplete3 = new google.maps.places.Autocomplete(document.getElementById('autocomplete3'), { types: [ 'geocode' ] });
+    autocomplete4 = new google.maps.places.Autocomplete(document.getElementById('autocomplete4'), { types: [ 'geocode' ] });
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {fillInAddress();});
+    google.maps.event.addListener(autocomplete2, 'place_changed', function() {fillInAddress();});
+    google.maps.event.addListener(autocomplete3, 'place_changed', function() {fillInAddress();});
+    google.maps.event.addListener(autocomplete4, 'place_changed', function() {fillInAddress();});
+  }
+  function fillInAddress() {
+    var place = autocomplete.getPlace();
+
+    for (var component in component_form) {
+      document.getElementById(component).value = "";
+      document.getElementById(component).disabled = false;
+    }
+
+    for (var j = 0; j < place.address_components.length; j++) {
+      var att = place.address_components[j].types[0];
+      if (component_form[att]) {
+        var val = place.address_components[j][component_form[att]];
+        document.getElementById(att).value = val;
+      }
+    }
+  }
+</script>
+</head>
+<body id="home" class="wide" onload="initialize()">
+<!-- PRELOADER -->
+<div id="preloader">
+    <div id="preloader-status">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+        <div id="preloader-title">Loading</div>
+    </div>
+</div>
+<!-- /PRELOADER -->
+
+<!-- WRAPPER -->
+<div class="wrapper">
+
+    <!-- HEADER -->
+    {% include 'header.html' %}
+    <!-- /HEADER -->
+    
+    <!-- CONTENT AREA -->
+    <div class="content-area">
+        
+        <!-- FIND PAGE -->
+        <section class="page-section no-padding slider">
+            <div class="container full-width">
+                 
+                <div class="main-slider">
+                    <div class="owl-carousel" id="main-slider">
+                        
+                        <!-- Slide 1 -->
+                        <div class="item slide1 ver1">
+
+                            <div class="caption">
+                                <div class="container">
+                                    <div class="div-table">
+                                        
+                                        <div class="div-cell">
+                                            <div class="caption-content">
+                                                <h2 class="caption-title">All Discounts Just For You</h2>
+                                                <h3 class="caption-subtitle">Find Best Rental Car</h3>
+                                                <!-- Search form -->
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-10 col-md-offset-1">
+
+                                                        <div class="form-search dark">
+                                                            <form action="/cars/all/">
+                                                                <div class="form-title">
+                                                                    <i class="fa fa-globe"></i>
+                                                                    <h2>Search for Cheap Rental Cars Wherever Your Are</h2>
+                                                                </div>
+
+                                                                <div class="row row-inputs">
+                                                                    <div class="container-fluid">
+                                                                        <div class="col-sm-8">
+                                                                            <div class="form-group has-icon has-label">
+                                                                                <label>Pickup Location</label>
+                                                                                <input type="text" class="form-control" name="PickupLocation" placeholder="Enter your pickup location" id="autocomplete" autocomplete="off" /><span class="form-control-icon"><i class="fa fa-map-marker"></i></span>
+                                                                                <span class="form-control-icon"><i class="fa fa-map-marker"></i></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group has-icon has-label">
+                                                                                <label for="formSearchUpDate">Picking Up Date & Time</label>
+                                                                                <input type="text" class="form-control datepicker" id="formSearchUpDate" placeholder="dd/mm/yyyy" required>
+                                                                                <span class="form-control-icon"><i class="fa fa-calendar"></i></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row row-inputs">
+                                                                    
+                                                                    <div class="container-fluid">
+                                                                        <div class="col-sm-8">
+                                                                            <div class="form-group has-icon has-label">
+                                                                                <label>Dropoff Location</label>
+                                                                                <input type="text" class="form-control" name="DropoffLocation" placeholder="Enter your dropoff location" id="autocomplete2" autocomplete="off" />
+                                                                                <span class="form-control-icon"><i class="fa fa-map-marker"></i></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <div class="form-group has-icon has-label">
+                                                                                <label for="formSearchOffDate">Dropping Off Date & Time</label>
+                                                                                <input type="text" class="form-control datepicker" id="formSearchOffDate" placeholder="dd/mm/yyyy" required>
+                                                                                <span class="form-control-icon"><i class="fa fa-calendar"></i></span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row row-submit">
+                                                                    <div class="container-fluid">
+                                                                        <div class="inner">
+                                                                            <!-- <i class="fa fa-plus-circle"></i> <a href="#">Advanced Search</a> -->
+                                                                            <button type="submit" id="formSearchSubmit" class="btn btn-submit btn-theme pull-right">Find Car</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!-- /Search form -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Slide 1 -->
+
+                        <!-- Slide 3 -->
+                        <div class="item slide3 ver3">
+                            <div class="caption">
+                                <div class="container">
+                                    <div class="div-table">
+                                        <div class="div-cell">
+                                            <div class="caption-content">
+                                                <!-- Search form -->
+                                                <div class="form-search light">
+                                                    <form action="/cars/all/">
+                                                        <div class="form-title">
+                                                            <i class="fa fa-globe"></i>
+                                                            <h2>Search for Cheap Rental Cars Wherever Your Are</h2>
+                                                        </div>
+
+                                                        <div class="row row-inputs">
+                                                            <div class="container-fluid">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group has-icon has-label">
+                                                                        <label>Pickup Location</label>
+                                                                        <input type="text" class="form-control" name="PickupLocation" placeholder="Enter your pickup location" id="autocomplete3" autocomplete="off" /><span class="form-control-icon"><i class="fa fa-map-marker"></i></span>
+                                                                        <span class="form-control-icon"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group has-icon has-label">
+                                                                        <label>Dropoff Location</label>
+                                                                        <input type="text" class="form-control" name="DropoffLocation" placeholder="Enter your dropoff location" id="autocomplete4" autocomplete="off" />
+                                                                        <span class="form-control-icon"><i class="fa fa-map-marker"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row row-inputs">
+                                                            <div class="container-fluid">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group has-icon has-label">
+                                                                        <label for="formSearchUpDate3">Picking Up Date & Time</label>
+                                                                        <input type="text" class="form-control datepicker" id="formSearchUpDate3" placeholder="dd/mm/yyyy" required>
+                                                                        <span class="form-control-icon"><i class="fa fa-calendar"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row row-inputs">
+                                                            <div class="container-fluid">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group has-icon has-label">
+                                                                        <label for="formSearchOffDate3">Dropping Off Date & Time</label>
+                                                                        <input type="text" class="form-control datepicker" id="formSearchOffDate3" placeholder="dd/mm/yyyy" required>
+                                                                        <span class="form-control-icon"><i class="fa fa-calendar"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row row-submit">
+                                                            <div class="container-fluid">
+                                                                <div class="inner">
+                                                                    <button type="submit" id="formSearchSubmit3" class="btn btn-submit ripple-effect btn-theme pull-right">Find Car</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- /Search form -->
+
+                                                <h2 class="caption-title">For rental Cars</h2>
+                                                <h3 class="caption-subtitle">Best Deals</h3>
+                                                <p class="caption-text">
+                                                    Sales Up  %45 Off<br/>
+                                                    All Rental Cars Start from  49$
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Slide 3 -->
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- /FIND PAGE -->
+
+        <!-- FEATURE PAGE -->
+        <section class="page-section">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-4 wow flipInY" data-wow-offset="70" data-wow-duration="1s">
+                        <div class="thumbnail thumbnail-featured no-border no-padding">
+                            <div class="media">
+                                    <div class="caption">
+                                        <div class="caption-wrapper div-table">
+                                            <div class="caption-inner div-cell">
+                                                <div class="caption-icon"><i class="fa fa-support"></i></div>
+                                                <h4 class="caption-title">7/24 Car Support</h4>
+                                                <div class="caption-text">Duis bibendum diam non erat facilaisis tincidunt. Fusce leo neque,lacinia at tempor vitae, porta at arcu.</div>
+                                                <!-- <div class="buttons">
+                                                    <span class="btn btn-theme ripple-effect btn-theme-transparent">Read More</span>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="caption hovered">
+                                        <div class="caption-wrapper div-table">
+                                            <div class="caption-inner div-cell">
+                                                <div class="caption-icon"><i class="fa fa-support"></i></div>
+                                                <h4 class="caption-title">7/24 Car Support</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow flipInY" data-wow-offset="70" data-wow-duration="1s" data-wow-delay="200ms">
+                        <div class="thumbnail thumbnail-featured no-border no-padding">
+                            <div class="media">
+                                    <div class="caption">
+                                        <div class="caption-wrapper div-table">
+                                            <div class="caption-inner div-cell">
+                                                <div class="caption-icon"><i class="fa fa-calendar"></i></div>
+                                                <h4 class="caption-title">Reservation Anytime</h4>
+                                                <div class="caption-text">Duis bibendum diam non erat facilaisis tincidunt. Fusce leo neque,lacinia at tempor vitae, porta at arcu.</div>
+                                                <!-- <div class="buttons">
+                                                    <span class="btn btn-theme ripple-effect btn-theme-transparent">Read More</span>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="caption hovered">
+                                        <div class="caption-wrapper div-table">
+                                            <div class="caption-inner div-cell">
+                                                <div class="caption-icon"><i class="fa fa-calendar"></i></div>
+                                                <h4 class="caption-title">Reservation Anytime</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 wow flipInY" data-wow-offset="70" data-wow-duration="1s" data-wow-delay="400ms">
+                        <div class="thumbnail thumbnail-featured no-border no-padding">
+                            <div class="media">
+                                    <div class="caption">
+                                        <div class="caption-wrapper div-table">
+                                            <div class="caption-inner div-cell">
+                                                <div class="caption-icon"><i class="fa fa-map-marker"></i></div>
+                                                <h4 class="caption-title">Lots of Locations</h4>
+                                                <div class="caption-text">Duis bibendum diam non erat facilaisis tincidunt. Fusce leo neque,lacinia at tempor vitae, porta at arcu.</div>
+                                                <!-- <div class="buttons">
+                                                    <span class="btn btn-theme ripple-effect btn-theme-transparent">Read More</span>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="caption hovered">
+                                        <div class="caption-wrapper div-table">
+                                            <div class="caption-inner div-cell">
+                                                <div class="caption-icon"><i class="fa fa-map-marker"></i></div>
+                                                <h4 class="caption-title">Lots of Locations</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- /FEATURE PAGE -->
+
+        <!-- INFORMATION PAGE -->
+        <section class="page-section dark">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6 wow fadeInLeft" data-wow-offset="200" data-wow-delay="100ms">
+                        <h2 class="section-title text-left">
+                            <small>What Do You Know About Us</small>
+                            <span>Who We Are ?</span>
+                        </h2>
+                        <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit. </p>
+                        <ul class="list-icons">
+                            <li><i class="fa fa-check-circle"></i>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                            <li><i class="fa fa-check-circle"></i>Proin tempus sapien non iaculis pretium.</li>
+                        </ul>
+                        <p class="btn-row">
+                            <a href="/cars/all/" class="btn btn-theme ripple-effect btn-theme-md">See All Vehicles</a>
+                            <a href="/cars/all/" class="btn btn-theme ripple-effect btn-theme-md btn-theme-transparent">Reservation Now</a>
+                        </p>
+                    </div>
+                    <div class="col-md-6 wow fadeInRight" data-wow-offset="200" data-wow-delay="300ms">
+                        <div class="owl-carousel img-carousel">
+                            <div class="item"><a href="/static/img/preview/slider/slide-775x500x1.jpg" data-gal="prettyPhoto"><img class="img-responsive" src="/static/img/preview/slider/slide-775x500x1.jpg" alt=""/></a></div>
+                            <div class="item"><a href="/static/img/preview/slider/slide-775x500x1.jpg" data-gal="prettyPhoto"><img class="img-responsive" src="/static/img/preview/slider/slide-775x500x1.jpg" alt=""/></a></div>
+                            <div class="item"><a href="/static/img/preview/slider/slide-775x500x1.jpg" data-gal="prettyPhoto"><img class="img-responsive" src="/static/img/preview/slider/slide-775x500x1.jpg" alt=""/></a></div>
+                            <div class="item"><a href="/static/img/preview/slider/slide-775x500x1.jpg" data-gal="prettyPhoto"><img class="img-responsive" src="/static/img/preview/slider/slide-775x500x1.jpg" alt=""/></a></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- /INFORMATION PAGE -->
+
+        <!-- RENTAL FLEETS PAGE -->
+        <section class="page-section">
+            <div class="container">
+
+                <h2 class="section-title wow fadeInUp" data-wow-offset="70" data-wow-delay="100ms">
+                    <small>What Kind of Car You Want</small>
+                    <span>Great Rental Offers for You</span>
+                </h2>
+
+                <div class="tabs wow fadeInUp" data-wow-offset="70" data-wow-delay="300ms">
+                    <ul id="tabs" class="nav"><!--
+                        --><li class=""><a href="#tab-1" data-toggle="tab">Best Offers</a></li><!--
+                        --><li class="active"><a href="#tab-2" data-toggle="tab">Popular Cars</a></li><!--
+                        --><li class=""><a href="#tab-3" data-toggle="tab">Economic Cars</a></li>
+                    </ul>
+                </div>
+
+                <div class="tab-content wow fadeInUp" data-wow-offset="70" data-wow-delay="500ms">
+
+                    <!-- tab 1 -->
+                    <div class="tab-pane fade" id="tab-1">
+
+                        <div class="swiper swiper--offers-best">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <!-- Slides -->
+                                    {% for car_list in cars %}
+                                    <div class="swiper-slide">
+                                        <div class="thumbnail no-border no-padding thumbnail-car-card">
+                                            <div class="media">
+                                                <a class="media-link" data-gal="prettyPhoto" href="{{  car_list.image  }}">
+                                                    <img src="{{  car_list.image  }}" alt=""/>
+                                                    <span class="icon-view"><strong><i class="fa fa-eye"></i></strong></span>
+                                                </a>
+                                            </div>
+                                            <div class="caption text-center">
+                                                <h4 class="caption-title"><a href="#">{{ car_list.brand_name }}</a></h4>
+                                                <div class="caption-text">Start from {{car_list.price}}$/day</div>
+                                                <div class="buttons">
+                                                    <a class="btn btn-theme ripple-effect" href="/cars/{{car_list.id}}">Rent It</a>
+                                                </div>
+                                                <table class="table">
+                                                    <tr>
+                                                        <td><i class="fa fa-car"></i>{{car_list.model_year}}</td>
+                                                        <td><i class="fa fa-dashboard"></i>{{car_list.engine_type}}</td>
+                                                        <td><i class="fa fa-cog"></i>{{car_list.gear_type}}</td>
+                                                        <td><i class="fa fa-road"></i>{{car_list.total_km}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="swiper-button-next"><i class="fa fa-angle-right"></i></div>
+                            <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- tab 2 -->
+                    <div class="tab-pane fade active in" id="tab-2">
+
+                        <div class="swiper swiper--offers-popular">
+                            <div class="swiper-container">
+
+                                <div class="swiper-wrapper">
+                                    <!-- Slides -->
+                                    {% for car_list in cars %}
+                                    <div class="swiper-slide">
+                                        <div class="thumbnail no-border no-padding thumbnail-car-card">
+                                            <div class="media">
+                                                <a class="media-link" data-gal="prettyPhoto" href="{{  car_list.image  }}">
+                                                    <img src="{{  car_list.image  }}" alt=""/>
+                                                    <span class="icon-view"><strong><i class="fa fa-eye"></i></strong></span>
+                                                </a>
+                                            </div>
+                                            <div class="caption text-center">
+                                                <h4 class="caption-title"><a href="/cars/{{car_list.id}}">{{ car_list.brand_name }}</a></h4>
+                                                <div class="caption-text">Start from {{car_list.price}}$/day</div>
+                                                <div class="buttons">
+                                                    <a class="btn btn-theme ripple-effect" href="/cars/{{car_list.id}}">Rent It</a>
+                                                </div>
+                                                <table class="table">
+                                                    <tr>
+                                                        <td><i class="fa fa-car"></i> {{car_list.model_year}}</td>
+                                                        <td><i class="fa fa-dashboard"></i> {{car_list.engine_type}}</td>
+                                                        <td><i class="fa fa-cog"></i> {{car_list.gear_type}}</td>
+                                                        <td><i class="fa fa-road"></i> {{car_list.total_km}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-next"><i class="fa fa-angle-right"></i></div>
+                            <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- tab 3 -->
+                    <div class="tab-pane fade" id="tab-3">
+
+                        <div class="swiper swiper--offers-economic">
+                            <div class="swiper-container">
+
+                                <div class="swiper-wrapper">
+                                    <!-- Slides -->
+                                    {% for car_list in cars %}
+                                    <div class="swiper-slide">
+                                        <div class="thumbnail no-border no-padding thumbnail-car-card">
+                                            <div class="media">
+                                                <a class="media-link" data-gal="prettyPhoto" href="{{  car_list.image  }}">
+                                                    <img src="{{  car_list.image  }}" alt=""/>
+                                                    <span class="icon-view"><strong><i class="fa fa-eye"></i></strong></span>
+                                                </a>
+                                            </div>
+                                            <div class="caption text-center">
+                                                <h4 class="caption-title"><a href="#">{{ car_list.brand_name }}</a></h4>
+                                                <div class="caption-text">Start from {{car_list.price}}$/day</div>
+                                                <div class="buttons">
+                                                    <a class="btn btn-theme ripple-effect" href="/cars/{{car_list.id}}">Rent It</a>
+                                                </div>
+                                                <table class="table">
+                                                    <tr>
+                                                        <td><i class="fa fa-car"></i>{{car_list.model_year}}</td>
+                                                        <td><i class="fa fa-dashboard"></i>{{car_list.engine_type}}</td>
+                                                        <td><i class="fa fa-cog"></i>{{car_list.gear_type}}</td>
+                                                        <td><i class="fa fa-road"></i>{{car_list.total_km}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+
+                            <!-- If we need navigation buttons -->
+                            <div class="swiper-button-next"><i class="fa fa-angle-right"></i></div>
+                            <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- /RENTAL OFFERS PAGE -->
+
+        <!-- TESTIMONIALS PAGE -->
+        <section class="page-section testimonials">
+            <div class="container wow fadeInUp" data-wow-offset="70" data-wow-delay="500ms">
+                <div class="testimonials-carousel">
+                    <div class="owl-carousel" id="testimonials">
+                        <div class="testimonial">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object testimonial-avatar" src="/static/img/preview/avatars/testimonial-140x140x1.jpg" alt="Testimonial avatar">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div class="testimonial-text">Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</div>
+                                    <div class="testimonial-name">John Anthony Gibson <span class="testimonial-position">Co- founder at Rent It</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object testimonial-avatar" src="/static/img/preview/avatars/testimonial-140x140x1.jpg" alt="Testimonial avatar">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div class="testimonial-text">Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</div>
+                                    <div class="testimonial-name">John Anthony Gibson <span class="testimonial-position">Co- founder at Rent It</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object testimonial-avatar" src="/static/img/preview/avatars/testimonial-140x140x1.jpg" alt="Testimonial avatar">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div class="testimonial-text">Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</div>
+                                    <div class="testimonial-name">John Anthony Gibson <span class="testimonial-position">Co- founder at Rent It</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /TESTIMONIALS PAGE -->
+
+        
+        <!-- SITE INFO PAGE -->
+        <section class="page-section image">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-offset="200" data-wow-delay="100ms">
+                        <div class="thumbnail thumbnail-counto no-border no-padding">
+                            <div class="caption">
+                                <div class="caption-icon"><i class="fa fa-heart"></i></div>
+                                <div class="caption-number">{{customers}}</div>
+                                <h4 class="caption-title">Happy customers</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-offset="200" data-wow-delay="200ms">
+                        <div class="thumbnail thumbnail-counto no-border no-padding">
+                            <div class="caption">
+                                <div class="caption-icon"><i class="fa fa-car"></i></div>
+                                <div class="caption-number">{{cars_count}}</div>
+                                <h4 class="caption-title">Total car count</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-offset="200" data-wow-delay="300ms">
+                        <div class="thumbnail thumbnail-counto no-border no-padding">
+                            <div class="caption">
+                                <div class="caption-icon"><i class="fa fa-flag"></i></div>
+                                <div class="caption-number">{{total_km}}</div>
+                                <h4 class="caption-title">Total KM/MIL</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-offset="200" data-wow-delay="400ms">
+                        <div class="thumbnail thumbnail-counto no-border no-padding">
+                            <div class="caption">
+                                <div class="caption-icon"><i class="fa fa-comments-o"></i></div>
+                                <div class="caption-number">{{bookings}}</div>
+                                <h4 class="caption-title">Total Bookings</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- /SITE INFO PAGE -->
+
+        <!-- FAQ PAGE -->
+        <section class="page-section">
+            <div class="container">
+
+                <h2 class="section-title wow fadeInDown" data-wow-offset="200" data-wow-delay="100ms">
+                    <small>See What People Ask to Us</small>
+                    <span>FAQS</span>
+                </h2>
+
+                <div class="row">
+                    <div class="col-md-6 wow fadeInLeft" data-wow-offset="200" data-wow-delay="200ms">
+                        <!-- FAQ -->
+                        <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                            <!-- faq1 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading1">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                            <span class="dot"></span> How can ı drop the rental car?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+                                    <div class="panel-body">
+                                        Duis bibendum diam non erat facilaisis tincidunt. Fusce leo neque, lacinia at tempor vitae, porta at arcu. Vestibulum varius non dui at pulvinar. Ut egestas orci in quam sollicitudin aliquet.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /faq1 -->
+                            <!-- faq2 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading2">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                            <span class="dot"></span> Where can I rent a car?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+                                    <div class="panel-body">
+                                        Duis bibendum diam non erat facilaisis tincidunt. Fusce leo neque, lacinia at tempor vitae, porta at arcu. Vestibulum varius non dui at pulvinar. Ut egestas orci in quam sollicitudin aliquet.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /faq2 -->
+                            <!-- faq3 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading3">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                            <span class="dot"></span> If I crash a car. What happens?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+                                    <div class="panel-body">
+                                        Duis bibendum diam non erat facilaisis tincidunt. Fusce leo neque, lacinia at tempor vitae, porta at arcu. Vestibulum varius non dui at pulvinar. Ut egestas orci in quam sollicitudin aliquet.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /faq3 -->
+                        </div>
+                        <!-- /FAQ -->
+                    </div>
+                    <div class="col-md-6 wow fadeInRight" data-wow-offset="200" data-wow-delay="200ms">
+                        <!-- FAQ -->
+                        <div class="panel-group accordion" id="accordion2" role="tablist" aria-multiselectable="true">
+                            <!-- faq1 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading21">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse21" aria-expanded="false" aria-controls="collapse21">
+                                            <span class="dot"></span> How can ı drop the rental car?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse21" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading21">
+                                    <div class="panel-body">
+                                        Duis bibendum diam non erat facilaisis tincidunt. Fusce leo neque, lacinia at tempor vitae, porta at arcu. Vestibulum varius non dui at pulvinar. Ut egestas orci in quam sollicitudin aliquet.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /faq1 -->
+                            <!-- faq2 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading22">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion2" href="#collapse22" aria-expanded="true" aria-controls="collapse22">
+                                            <span class="dot"></span> Where can I rent a car?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse22" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading22">
+                                    <div class="panel-body">
+                                        Duis bibendum diam non erat facilaisis tincidunt. Fusce leo neque, lacinia at tempor vitae, porta at arcu. Vestibulum varius non dui at pulvinar. Ut egestas orci in quam sollicitudin aliquet.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /faq2 -->
+                            <!-- faq3 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading23">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapse23" aria-expanded="false" aria-controls="collapse23">
+                                            <span class="dot"></span> If I crash a car. What happens?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse23" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading23">
+                                    <div class="panel-body">
+                                        Duis bibendum diam non erat facilaisis tincidunt. Fusce leo neque, lacinia at tempor vitae, porta at arcu. Vestibulum varius non dui at pulvinar. Ut egestas orci in quam sollicitudin aliquet.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /faq3 -->
+                        </div>
+                        <!-- /FAQ -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- /FAQ PAGE -->
+
+        <!-- GOOGLE MAP PAGE -->
+        <section class="page-section no-padding no-bottom-space-off">
+            <div class="container full-width">
+
+                <!-- Google map -->
+                <!-- <div class="google-map">
+                    <div id="map-canvas"></div>
+                </div> -->
+                <!-- /Google map -->
+
+            </div>
+        </section>
+        <!-- /GOOGLE MAP PAGE -->
+
+
+        <!-- SUBSCRIBE PAGE -->
+        <section class="page-section image subscribe">
+            <div class="container">
+
+                <h2 class="section-title wow fadeInDown" data-wow-offset="200" data-wow-delay="100ms">
+                    <small>You Can Follow Us By E Mail</small>
+                    <span>Subscrıbe</span>
+                </h2>
+
+                <div class="row wow fadeInDown" data-wow-offset="200" data-wow-delay="200ms">
+                    <div class="col-md-8 col-md-offset-2">
+
+                        <p class="text-center">This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
+
+                        <!-- Subscribe form -->
+                        <form action="/subscribe" method="post">
+                            <div class="form-group">
+                                <label for="formSubscribeEmail" class="sr-only">Enter your email here</label>
+                                <input type="text" name="email" class="form-control" id="formSubscribeEmail" placeholder="Enter your email here" title="Email is required">
+                            </div>
+                            <button type="submit" id="formSearchSubmit3" class="btn btn-submit ripple-effect btn-theme">Subscribe</button>
+                        </form>
+                        <!-- Subscribe form -->
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- /SUBSCRIBE PAGE -->
+
+        <!-- CUSTOMER SERVICE PAGE -->
+        <section class="page-section">
+            <div class="container">
+
+                <h2 class="section-title wow fadeInDown" data-wow-offset="200" data-wow-delay="100ms">
+                    <small>Do You Have Any Question or Anything else </small>
+                    <span>Customer service</span>
+                </h2>
+
+                <!-- Team row -->
+                <div class="row">
+                    {% for member in staff %}
+                    <!-- Teams -->
+                    <div class="col-md-3 col-sm-6 wow fadeInDown" data-wow-offset="200" data-wow-delay="100ms">
+                        <div class="thumbnail thumbnail-team no-border no-padding">
+                            <div class="media">
+                                <img src="/static/img/preview/team/admin.png" alt=""/>
+                            </div>
+                            <div class="caption">
+                                <h4 class="caption-title">{{member.username}}<small>Customer Service</small></h4>
+                                <ul class="team-details">
+                                    <li>Tel: {{member.phone}}</li>
+                                    <li><a href="mailto:{{member.email}}">{{member.email}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Teams -->
+                    {% endfor %}
+                </div>
+                <!-- /Team row -->
+
+            </div>
+        </section>
+        <!-- /CUSTOMER SERVICE PAGE -->
+
+        <!-- GET IN TOUCH PAGE -->
+        {% include 'connection.html' %}
+        <!-- /GET IN TOUCH PAGE -->
+
+    </div>
+    <!-- /CONTENT AREA -->
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+    <!-- /FOOTER -->
+
+    <div id="to-top" class="to-top"><i class="fa fa-angle-up"></i></div>
+
+</div>
+<!-- /WRAPPER -->
+
+<!-- JS Global -->
+<script src="/static/plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="/static/plugins/superfish/js/superfish.min.js"></script>
+<script src="/static/plugins/prettyphoto/js/jquery.prettyPhoto.js"></script>
+<script src="/static/plugins/owl-carousel2/owl.carousel.min.js"></script>
+<script src="/static/plugins/jquery.sticky.min.js"></script>
+<script src="/static/plugins/jquery.easing.min.js"></script>
+<script src="/static/plugins/jquery.smoothscroll.min.js"></script>
+<!--<script src="/static/plugins/smooth-scrollbar.min.js"></script>-->
+<!--<script src="/static/plugins/wow/wow.min.js"></script>-->
+<script>
+    // WOW - animated content
+    //new WOW().init();
+</script>
+<script src="/static/plugins/swiper/js/swiper.jquery.min.js"></script>
+<script src="/static/plugins/datetimepicker/js/moment-with-locales.min.js"></script>
+<script src="/static/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- JS Page Level -->
+<script src="/static/js/theme-ajax-mail.js"></script>
+<script src="/static/js/theme.js"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script> -->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/static/plugins/jquery.cookie.js"></script>
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDroYqdutlSZPgXDPru9yUh59xPuGr9wAA&callback=initialize&libraries=places&v=weekly"
+defer
+></script>
+    <!-- <script src="/static/js/theme-config.js"></script> -->
+<!--<![endif]-->
+
+</body>
+
+<!-- Mirrored from jthemes.net/themes/html/rentit/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Jan 2023 05:13:54 GMT -->
+</html>

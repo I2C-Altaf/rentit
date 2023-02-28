@@ -1,0 +1,55 @@
+<!-- HEADER -->
+<header class="header fixed">
+    <div class="header-wrapper">
+        <div class="container">
+
+            <!-- Logo -->
+            <div class="logo">
+                <a href="/home"><img src="/static/img/logo-rentit.png" alt="Rent It"/></a>
+            </div>
+            <!-- /Logo -->
+
+            <!-- Mobile menu toggle button -->
+            <a href="#" class="menu-toggle btn btn-theme-transparent"><i class="fa fa-bars"></i></a>
+            <!-- /Mobile menu toggle button -->
+
+            <!-- Navigation -->
+            <nav class="navigation closed clearfix">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <!-- navigation menu -->
+                        <a href="#" class="menu-toggle-close btn"><i class="fa fa-times"></i></a>
+                        <ul class="nav sf-menu">
+                            <li ><a href="/home">Home</a>
+                            </li>
+                            <li><a href="/cars/all">Vehicles</a></li>
+                            <li><a href="/faqs/">FAQS</a></li>
+                            <li><a href="/contactus">Contact</a></li>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="/mybook" style="color: orange;">My Bookings</a></li>
+                                <li><a style="color: black; background-color: red;" href="/accounts/logout">Logout</a></li>
+                            {% else %}
+                                <li><a style="color: black; background-color: cyan;" href="/accounts/login">Login</a></li>
+                            {% endif %}
+                            <li>
+                                <ul class="social-icons">
+                                    <li><a href="https://www.facebook.com/login/" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="https://twitter.com/i/flow/login" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/accounts/login/" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                                    <li><a href="https://in.pinterest.com/login/" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- /navigation menu -->
+                    </div>
+                </div>
+                <!-- Add Scroll Bar -->
+                <div class="swiper-scrollbar"></div>
+            </nav>
+            <!-- /Navigation -->
+
+        </div>
+    </div>
+
+</header>
+<!-- /HEADER -->

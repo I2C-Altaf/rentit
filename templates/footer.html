@@ -1,0 +1,71 @@
+<footer class="footer">
+    <div class="footer-widgets">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="widget">
+                        <h4 class="widget-title">About Us</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sollicitudin ultrices suscipit. Sed commodo vel mauris vel dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <ul class="social-icons">
+                            <li><a href="https://www.facebook.com/login/" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/i/flow/login" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/accounts/login/" class="instagram"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="https://in.pinterest.com/login/" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="widget">
+                        <h4 class="widget-title">News Letter</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <form action="/subscribe" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="email" name="email" placeholder="Stay Updated for the News & More"/>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-theme btn-theme-transparent">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="widget widget-categories">
+                        <h4 class="widget-title">Information</h4>
+                        <ul>
+                            <li><a href="/about">About Us</a></li>
+                            <li><a href="/contactus">Contact Us</a></li>
+                            <li><a href="/faqs">FAQs</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="widget widget-tag-cloud">
+                        <h4 class="widget-title">Item Tags</h4>
+                        <ul>
+                            {% for car_list in cars %}
+                            <li><a href="#">{{car_list.category}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-meta">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="btn-row text-center">
+                        <a href="https://www.facebook.com/login/" class="btn btn-theme btn-icon-left facebook"><i class="fa fa-facebook"></i>FACEBOOK</a>
+                        <a href="https://twitter.com/i/flow/login" class="btn btn-theme btn-icon-left twitter"><i class="fa fa-twitter"></i>TWITTER</a>
+                        <a href="https://www.instagram.com/accounts/login/" class="btn btn-theme btn-icon-left instagram"><i class="fa fa-instagram"></i>INSTAGRAM</a>
+                        <a href="https://in.pinterest.com/login/" class="btn btn-theme btn-icon-left pinterest"><i class="fa fa-pinterest"></i>PINTEREST</a>
+                    </p>
+                    <div class="copyright">&copy; 2015 Rent It — An One Page Rental Car Theme made with passion by Idea2Code Infotech</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

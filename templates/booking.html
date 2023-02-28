@@ -1,0 +1,386 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from jthemes.net/themes/html/rentit/booking.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Jan 2023 05:14:27 GMT -->
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Rent It</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/static/ico/favicon.ico">
+
+    <!-- CSS Global -->
+    <link href="/static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/static/plugins/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/plugins/prettyphoto/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/plugins/owl-carousel2/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/static/plugins/owl-carousel2/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/static/plugins/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/plugins/swiper/css/swiper.min.css" rel="stylesheet">
+
+    <link href="/static/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <link href="/static/plugins/countdown/jquery.countdown.css" rel="stylesheet">
+    <link href="/static/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="/static/css/theme.css" rel="stylesheet">
+    <link href="/static/css/theme-red-1.css" rel="stylesheet" id="theme-config-link">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Head Libs -->
+    <script src="/static/plugins/modernizr.custom.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=places"></script> -->
+    <script type="text/javascript">
+    var placeSearch,autocomplete, autocomplete2;
+    function initialize() {
+    autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), { types: [ 'geocode' ] });
+    autocomplete2 = new google.maps.places.Autocomplete(document.getElementById('autocomplete2'), { types: [ 'geocode' ] });
+    google.maps.event.addListener(autocomplete2, 'place_changed', function() {
+    fillInAddress();});
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      fillInAddress();
+    });
+  }
+  function fillInAddress() {
+    var place = autocomplete.getPlace();
+
+    for (var component in component_form) {
+      document.getElementById(component).value = "";
+      document.getElementById(component).disabled = false;
+    }
+
+    for (var j = 0; j < place.address_components.length; j++) {
+      var att = place.address_components[j].types[0];
+      if (component_form[att]) {
+        var val = place.address_components[j][component_form[att]];
+        document.getElementById(att).value = val;
+      }
+    }
+  }
+</script>
+
+    <!--[if lt IE 9]>
+    <script src="/static/plugins/iesupport/html5shiv.js"></script>
+    <script src="/static/plugins/iesupport/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="home" class="wide" onload="initialize()">
+<!-- PRELOADER -->
+<div id="preloader">
+    <div id="preloader-status">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+        <div id="preloader-title">Loading</div>
+    </div>
+</div>
+<!-- /PRELOADER -->
+
+<!-- WRAPPER -->
+<div class="wrapper">
+
+    <!-- HEADER -->
+    {% include 'header.html' %}
+    <!-- /HEADER -->
+
+    <!-- CONTENT AREA -->
+    <div class="content-area">
+
+        <!-- BREADCRUMBS -->
+        <section class="page-section breadcrumbs text-center">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Car Booking</h1>
+                </div>
+            </div>
+        </section>
+        <!-- /BREADCRUMBS -->
+
+        <!-- PAGE WITH SIDEBAR -->
+        <section class="page-section with-sidebar sub-page">
+            <div class="container">
+                <div class="row">
+                    <!-- CONTENT -->
+                    <div class="col-md-9 content" id="content">
+
+                        <h3 class="block-title alt"><i class="fa fa-angle-down"></i>Car Information</h3>
+                        {% for message in messages %}
+                        <h3>{{message}}</h3>
+                        {%endfor%}
+                        <div class="car-big-card alt">
+                            <div class="row">
+                                {% for car_list in cars %}
+                                <div class="col-md-8">
+                                        <div class="item">
+                                            <a class="btn btn-zoom" href="{{  car_list.image  }}" data-gal="prettyPhoto"><i class="fa fa-arrows-h"></i></a>
+                                            <a href="{{  car_list.image  }}" data-gal="prettyPhoto"><img class="img-responsive" src="{{  car_list.image  }}" width="450" height="400" align="middle" alt=""/></a>
+                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="car-details">
+                                        <div class="list">
+                                            <ul>
+                                                <li class="title">
+                                                    <h2>{{  car_list.brand_name  }}</h2>
+                                                    <h2><span>{{  car_list.engine_type  }}</span></h2>
+                                                </li>
+                                                <li>Under {{  car_list.total_km  }} Km</li>
+                                                <li>Transmission {{  car_list.gear_type  }}</li>
+                                                <li>5 Year service included</li>
+                                                <li>Manufacturing Year {{  car_list.model_year  }}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="price">
+                                            <strong>{{  car_list.price  }}</strong> <span>$/day</span> <i class="fa fa-info-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <hr class="page-divider half transparent"/>
+
+                        <h3 class="block-title alt"><i class="fa fa-angle-down"></i>Extra & Free Services</h3>
+                        <form role="form" class="form-extras" action="/create-checkout-session/" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div>
+                                        {% for service in services %}
+                                        <div class="checkbox checkbox-danger">
+                                            <input name="service" type="checkbox" value="{{ service.id }}">
+                                            <label for="checkbox">{{ service.service_name}}<span class="pull-right">{{service.price}} $ /for a day</span></label>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <h3 class="block-title alt"><i class="fa fa-angle-down"></i>Customer Information</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="inlineRadio1" value="Mr" name="radioInline" checked="">
+                                        <label for="inlineRadio1">Mr</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="inlineRadio2" value="Miss" name="radioInline">
+                                        <label for="inlineRadio2">Miss</label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="inlineRadio2" value="Mrs" name="radioInline">
+                                        <label for="inlineRadio2">Mrs</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input name="name" title="Name is required" data-toggle="tooltip"
+                                                class="form-control alt" type="text" placeholder="Name and Surname:*" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input name="email" title="Email is required" data-toggle="tooltip"
+                                                class="form-control alt" type="text" placeholder="Your Email Address:*" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"><input name="number" class="form-control alt" type="text" placeholder="Phone Number:" required></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <b>Pick Up Date:</b>
+                                    <!-- <span class="form-control-icon"><i class="fa fa-calendar"></i></span> -->
+                                    <input type="text" class="form-control alt datepicker" name="pickup_date" id="formSearchOffDate3" placeholder="dd/mm/yyyy" required>
+                                    <span class="form-control-icon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <b>Drop Date:</b>
+                                    <input type="text" class="form-control alt datepicker" name="drop_date" id="formSearchOffDate3" placeholder="dd/mm/yyyy" required>
+                                    <span class="form-control-icon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Pickup Location</label>
+                                    <input type="text" class="form-control alt" name="PickupLocation" placeholder="Enter your pickup location" id="autocomplete" autocomplete="off" /><span class="form-control-icon"><i class="fa fa-map-marker"></i></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Dropoff Location</label>
+                                    <input type="text" class="form-control alt" name="DropoffLocation" placeholder="Enter your dropoff location" id="autocomplete2" autocomplete="off" />
+                                    <span class="form-control-icon"><i class="fa fa-map-marker"></i></span>
+                                </div>
+                                {% for car_list in cars %}
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input name="cid" data-toggle="tooltip" class="form-control alt" type="hidden" placeholder="Car id" value={{car_list.id}} readonly>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            
+                            <h3 class="block-title alt"><i class="fa fa-angle-down"></i>Additional Information</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <textarea name="fad-message" id="fad-message" data-toggle="tooltip"
+                                                class="form-control alt" placeholder="Additional Information" cols="30" rows="10"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="overflowed reservation-now">
+                                <div class="checkbox pull-left">
+                                    <input id="accept" type="checkbox" name="fd-name" title="Please accept" data-toggle="tooltip" required>
+                                    <label for="accept">I accept all information, Payments, Terms & Conditions</label>
+                                </div>
+                            </div>
+                            <script src="https://js.stripe.com/v3/"></script>
+                            <button type="submit" class="btn btn-lg btn-primary" id="checkout-button">Checkout</button>
+                            <!-- <button type="submit" id="formSearchSubmit3" class="btn btn-submit ripple-effect btn-theme">Book Car</button> -->
+                        </form>
+                    </div>
+                    <!-- /CONTENT -->
+
+                    <!-- SIDEBAR -->
+                    <aside class="col-md-3 sidebar" id="sidebar">
+                        <!-- widget detail reservation -->
+                        <!-- <div class="widget shadow widget-details-reservation">
+                            <h4 class="widget-title">Detail Reservation</h4>
+                            <div class="widget-content">
+                                <h5 class="widget-title-sub">Picking Up Location</h5>
+                                <div class="media">
+                                    <span class="media-object pull-left"><i class="fa fa-calendar"></i></span>
+                                    <div class="media-body"><p>15 January 2015 / 08:00 am</p></div>
+                                </div>
+                                <div class="media">
+                                    <span class="media-object pull-left"><i class="fa fa-location-arrow"></i></span>
+                                    <div class="media-body"><p>From SkyLine AirPort</p></div>
+                                </div>
+                                <h5 class="widget-title-sub">Droping Off Location</h5>
+                                <div class="media">
+                                    <span class="media-object pull-left"><i class="fa fa-calendar"></i></span>
+                                    <div class="media-body"><p>15 January 2015 / 08:00 am</p></div>
+                                </div>
+                                <div class="media">
+                                    <span class="media-object pull-left"><i class="fa fa-location-arrow"></i></span>
+                                    <div class="media-body"><p>From SkyLine AirPort</p></div>
+                                </div>
+                                <div class="button">
+                                    <a href="#" class="btn btn-block btn-theme btn-theme-dark">Update Reservation</a>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- /widget detail reservation -->
+                        <!-- widget testimonials -->
+                        <div class="widget shadow">
+                            <div class="widget-title">Testimonials</div>
+                            <div class="testimonials-carousel">
+                                <div class="owl-carousel" id="testimonials">
+                                    <div class="testimonial">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="testimonial-text">Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</div>
+                                                <div class="testimonial-name">John Doe <span class="testimonial-position">Co- founder at Rent It</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="testimonial">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="testimonial-text">Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</div>
+                                                <div class="testimonial-name">John Doe <span class="testimonial-position">Co- founder at Rent It</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="testimonial">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="testimonial-text">Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.</div>
+                                                <div class="testimonial-name">John Doe <span class="testimonial-position">Co- founder at Rent It</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /widget testimonials -->
+                        <!-- widget helping center -->
+                        <div class="widget shadow widget-helping-center">
+                            <h4 class="widget-title">Helping Center</h4>
+                            <div class="widget-content">
+                                <p>Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros.</p>
+                                <h5 class="widget-title-sub">+90 555 444 66 33</h5>
+                                <p><a href="mailto:support@supportcenter.com">support@supportcenter.com</a></p>
+                                <div class="button">
+                                    <a href="#" class="btn btn-block btn-theme btn-theme-dark">Support Center</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /widget helping center -->
+                    </aside>
+                    <!-- /SIDEBAR -->
+
+                </div>
+            </div>
+        </section>
+        <!-- /PAGE WITH SIDEBAR -->
+
+        <!-- GET IN TOUCH PAGE -->
+        {% include 'connection.html' %}
+        <!-- /GET IN TOUCH PAGE -->
+
+    </div>
+    <!-- /CONTENT AREA -->
+
+    <!-- FOOTER -->
+    {% include 'footer.html' %}
+    <!-- /FOOTER -->
+
+    <div id="to-top" class="to-top"><i class="fa fa-angle-up"></i></div>
+
+</div>
+<!-- /WRAPPER -->
+
+<!-- JS Global -->
+<script src="/static/plugins/jquery/jquery-1.11.1.min.js"></script>
+<script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="/static/plugins/superfish/js/superfish.min.js"></script>
+<script src="/static/plugins/prettyphoto/js/jquery.prettyPhoto.js"></script>
+<script src="/static/plugins/owl-carousel2/owl.carousel.min.js"></script>
+<script src="/static/plugins/jquery.sticky.min.js"></script>
+<script src="/static/plugins/jquery.easing.min.js"></script>
+<script src="/static/plugins/jquery.smoothscroll.min.js"></script>
+<!--<script src="/static/plugins/smooth-scrollbar.min.js"></script>-->
+<script src="/static/plugins/swiper/js/swiper.jquery.min.js"></script>
+<script src="/static/plugins/datetimepicker/js/moment-with-locales.min.js"></script>
+<script src="/static/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- JS Page Level -->
+<script src="/static/js/theme-ajax-mail.js"></script>
+<script src="/static/js/theme.js"></script>
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script src="/static/plugins/jquery.cookie.js"></script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDroYqdutlSZPgXDPru9yUh59xPuGr9wAA&libraries=places&v=weekly"
+      defer
+    ></script>
+<!-- <script src="/static/js/theme-config.js"></script> -->
+<!--<![endif]-->
+
+</body>
+
+<!-- Mirrored from jthemes.net/themes/html/rentit/booking.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Jan 2023 05:14:27 GMT -->
+</html>
