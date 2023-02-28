@@ -33,7 +33,7 @@ class Users(AbstractUser):
     password = models.CharField(max_length=5000)
     phone = models.BigIntegerField(blank=False, unique=False, validators=[MaxValueValidator(9999999999)])
     otp = models.CharField(max_length=100, null=True, editable=False)
-    profile = models.ImageField(upload_to='images/')
+    profile = models.ImageField()
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_subscribed = models.BooleanField(default=False)

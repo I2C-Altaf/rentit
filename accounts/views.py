@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import status
 
+from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.models import auth
 from django.shortcuts import render, redirect
@@ -16,7 +17,7 @@ from django.core.exceptions import ValidationError
 from accounts.email import send_otp_email
 from accounts.token import get_tokens_for_user
 from accounts.serializers import *
-from PIL import Image
+from rentit.settings import MEDIA_DIR
 
 import os
 # Create your views here.
@@ -41,6 +42,11 @@ def login(request):
     else:
         return render(request,'login.html')
 
+def handle_uploaded_file(file):
+    with open(os.path.join(f"{MEDIA_DIR}/{file.name}"), 'wb+') as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
+
 @csrf_exempt
 def signup(request):
     if request.method == "POST":
@@ -55,21 +61,17 @@ def signup(request):
         else:
             print("good email")
         
-        # sz = os.path.getsize("Data.csv")
-        # print("==testimage===>",request.FILES['testimage'].DEFAULT_CHUNK_SIZE)
         if str(request.FILES['testimage']).split('.')[-1].lower() == "jpg":
-            # user = Users.objects.create(
-            #     username = request.POST.get('name'),
-            #     email = request.POST.get('email'),
-            #     password = make_password(request.POST.get('password')),
-            #     phone = request.POST.get('phone'),
-            #     profile = request.FILES['testimage']
-            # )
-            # img = Image.open(request.FILES['testimage'])
-            # if 1200 >= img.width or img.height <= 300:
-            #     messages.info(request,"Height & width Min 300X300 and max 1200X1200")
-            #     return render(request,'signup.html')
-            # user.save()
+            user = Users.objects.create(
+                username = request.POST.get('name'),
+                email = request.POST.get('email'),
+                password = make_password(request.POST.get('password')),
+                phone = request.POST.get('phone'),
+                profile = request.FILES['testimage']
+            )
+            user.save()
+            files = request.FILES['testimage']
+            handle_uploaded_file(files)
             return redirect("/accounts/login")
         else:
             messages.info(request,"Only .jpg Images allowed")
